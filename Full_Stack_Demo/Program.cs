@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Full_Stack_Demo.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<Full_Stack_DemoContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Full_Stack_DemoContext") ?? throw new InvalidOperationException("Connection string 'Full_Stack_DemoContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
